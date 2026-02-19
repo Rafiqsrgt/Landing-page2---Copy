@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Affiliate Warehouse | Better Pricing Through Collective Buying</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Smooth scrolling for menu links */
+        html { scroll-behavior: smooth; }
+        
+        * { font-family: 'Inter', sans-serif; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        .tab-btn { position: relative; }
+        .tab-btn.active { color: #F97316; font-weight: 600; border-bottom: 4px solid #F97316; }
+        .accordion-item { border: 1px solid #E5E7EB; border-radius: 8px; margin-bottom: 12px; overflow: hidden; }
+        .accordion-header { padding: 16px; background: #FAFAFA; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 600; color: #1F2937; }
+        .accordion-header:hover { background: #F3F4F6; }
+        .accordion-body { padding: 16px; display: none; color: #4B5563; line-height: 1.6; }
+        .accordion-body.active { display: block; }
+        .pricing-compare-table { width: 100%; border-collapse: collapse; }
+        .pricing-compare-table td { padding: 12px; border-bottom: 1px solid #E5E7EB; }
+        .pricing-compare-table td:first-child { font-weight: 600; color: #1F2937; }
+        .pricing-compare-table .check { color: #10B981; font-weight: bold; }
+        .testimonial-card { background: white; border-left: 4px solid #F97316; padding: 20px; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+        .stars { color: #FCD34D; }
+        .step-number { font-size: 28px; font-weight: 700; color: #F97316; }
+        .trust-badge { display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; background: #FEF3C7; border: 1px solid #FCD34D; border-radius: 6px; font-size: 13px; font-weight: 600; color: #92400E; }
+        .cta-button { transition: all 0.3s ease; }
+        .cta-button:hover { transform: translateY(-2px); }
+        .success-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.7);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+        }
+        .success-modal.show { display: flex; }
+        .success-card { background: white; border-radius: 12px; padding: 40px; max-width: 500px; text-align: center; }
+        /* Hero image styling: slightly raised, narrower, shifted right on larger screens */
+        .hero-figure img {
+            width: 100%;
+            max-width: 420px;
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(2,6,23,0.35);
+            object-fit: cover;
+            transition: transform 0.45s ease, box-shadow 0.45s ease;
+            transform: translateY(-8px);
+        }
+        .hero-figure img:hover { transform: translateY(-12px) scale(1.02); box-shadow: 0 28px 56px rgba(2,6,23,0.42); }
+
+        @media (min-width: 768px) {
+            .hero-figure img { max-width: 480px; transform: translateY(-18px) translateX(18px); }
+            .hero-figure img:hover { transform: translateY(-22px) translateX(20px) scale(1.02); box-shadow: 0 36px 70px rgba(2,6,23,0.45); }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- HEADER WITH NAVIGATION -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 shadow-lg">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="text-2xl font-bold tracking-tight">
+                Affiliate<span class="text-orange-500">Warehouse</span>
+            </div>
+
+            <nav class="hidden md:flex space-x-8 items-center">
+                <a href="#how-it-works" class="text-gray-300 hover:text-orange-500 font-medium transition duration-300">How It Works</a>
+                <a href="#pricing" class="text-gray-300 hover:text-orange-500 font-medium transition duration-300">Pricing</a>
+                <a href="#compliance" class="text-gray-300 hover:text-orange-500 font-medium transition duration-300">Compliance</a>
+                <a href="#faq" class="text-gray-300 hover:text-orange-500 font-medium transition duration-300">FAQ</a>
+                <a href="#apply" class="bg-orange-500 hover:bg-orange-600 text-white font-semibold py-2 px-6 rounded transition duration-300">Get Started</a>
+            </nav>
+
+            <button id="mobile-menu-btn" class="md:hidden text-gray-300 hover:text-white focus:outline-none">
+                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+        </div>
+
+        <div id="mobile-menu" class="hidden md:hidden bg-slate-800 px-6 py-4 border-t border-slate-700">
+            <a href="#how-it-works" class="block py-3 text-gray-300 hover:text-orange-500 font-medium border-b border-slate-700 mobile-link">How It Works</a>
+            <a href="#pricing" class="block py-3 text-gray-300 hover:text-orange-500 font-medium border-b border-slate-700 mobile-link">Pricing</a>
+            <a href="#compliance" class="block py-3 text-gray-300 hover:text-orange-500 font-medium border-b border-slate-700 mobile-link">Compliance</a>
+            <a href="#faq" class="block py-3 text-gray-300 hover:text-orange-500 font-medium border-b border-slate-700 mobile-link">FAQ</a>
+            <a href="#apply" class="block mt-4 text-center bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3 rounded mobile-link">Get Started</a>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white pt-16 pb-24 px-4 md:px-6 text-center md:text-left border-b-8 border-orange-500 relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-96 h-96 bg-orange-500 opacity-5 rounded-full blur-3xl -mr-48 -mt-48"></div>
+        <div class="container mx-auto max-w-6xl relative z-10">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div class="max-w-2xl">
+                    <div class="inline-block mb-6">
+                        <span class="trust-badge">For Electrical, HVAC & Solar Contractors</span>
+                    </div>
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
+                        We Help Contractors Access Better Pricing — <span class="text-orange-400">Transparently</span>
+                    </h1>
+                    <p class="text-lg md:text-xl text-gray-300 mb-8 leading-relaxed">
+                        Collective buying power, price tracking, and corporate-level trade accounts — without lock-ins or obligations.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 items-start justify-center md:justify-start mb-8">
+                        <a href="#apply" class="w-full sm:w-auto text-center cta-button bg-orange-500 hover:bg-orange-600 text-white font-bold py-4 px-8 rounded-lg text-lg shadow-lg">
+                            Apply to Become a Preferred Contractor
+                        </a>
+                        <a href="#how-it-works" class="w-full sm:w-auto text-center cta-button bg-slate-700 hover:bg-slate-600 text-white font-bold py-4 px-8 rounded-lg text-lg">
+                            See How It Works
+                        </a>
+                    </div>
+                    <div class="flex flex-col sm:flex-row gap-4 text-sm text-gray-400 font-medium">
+                        <span class="flex items-center gap-2"><span class="text-orange-400">✓</span> No lock-ins</span>
+                        <span class="flex items-center gap-2"><span class="text-orange-400">✓</span> No discount = no charge</span>
+                        <span class="flex items-center gap-2"><span class="text-orange-400">✓</span> Optional price alerts</span>
+                    </div>
+                </div>
+
+                <div class="hero-figure flex items-center justify-center md:justify-end mt-8 md:mt-0">
+                    <img src="img.png" alt="Contractors working - Affiliate Warehouse" class="w-full max-w-sm md:max-w-md rounded-xl shadow-2xl object-cover">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section id="how-it-works" class="py-20 px-4 md:px-6 bg-white">
+        <div class="container mx-auto max-w-6xl">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-4">How It Works</h2>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                    Simple, transparent process. No complexity. No hidden fees. No lock-ins.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+                <div class="border-l-4 border-orange-500 pl-6 py-4">
+                    <div class="flex items-start gap-4">
+                        <div class="step-number">01</div>
+                        <div>
+                            <h3 class="text-xl font-bold text-slate-900 mb-3">Buy Together as Preferred Contractors</h3>
+                            <p class="text-gray-600 mb-2">
+                                Instead of purchasing separately through individual accounts, preferred contractors may purchase through our national corporate accounts. Aggregated purchasing volumes may enable access to pricing structures typically available to larger operators — subject to supplier approval and terms.
+                            </p>
+                            <p class="text-sm text-gray-500 italic">✓ Independent contractors choose to participate • No obligation • Voluntary participation</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="border-l-4 border-orange-500 pl-6 py-4">
+                    <div class="flex items-start gap-4">
+                        <div class="step-number">02</div>
+                        <div>
+                            <h3 class="text-xl font-bold text-slate-900 mb-3">Order as Normal Through Wholesalers</h3>
+                            <p class="text-gray-600 mb-2">
+                                Contractors order directly through Affiliate Warehouse-enabled wholesaler access. Same suppliers. Same products. Same backend systems.
+                            </p>
+                            <p class="text-sm text-gray-500 italic">✓ Job-coded • Fully traceable • All purchases through normal wholesaler channels</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="border-l-4 border-orange-500 pl-6 py-4">
+                    <div class="flex items-start gap-4">
+                        <div class="step-number">03</div>
+                        <div>
+                            <h3 class="text-xl font-bold text-slate-900 mb-3">Track Pricing Over Time</h3>
+                            <p class="text-gray-600 mb-2">
+                                Our system monitors pricing on your repeat purchases. You receive optional email alerts when prices increase or decrease compared to your prior purchases.
+                            </p>
+                            <p class="text-sm text-gray-500 italic">✓ Optional notifications • Compare anytime • Historical price visibility</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="border-l-4 border-orange-500 pl-6 py-4">
+                    <div class="flex items-start gap-4">
+                        <div class="step-number">04</div>
+                        <div>
+                            <h3 class="text-xl font-bold text-slate-900 mb-3">Compare & Save (or Don't)</h3>
+                            <p class="text-gray-600 mb-2">
+                                Compare pricing side-by-side against your original trade accounts at any time. No obligation to use Affiliate Warehouse pricing if it's not better.
+                            </p>
+                            <p class="text-sm text-gray-500 italic">✓ Full transparency • Your choice • Stop anytime</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-gradient-to-r from-orange-50 to-amber-50 border border-orange-200 rounded-lg p-8 text-center">
+                <h3 class="text-xl font-bold text-slate-900 mb-3">Why Better Prices Are Possible</h3>
+                <p class="text-gray-700 max-w-3xl mx-auto">
+                    By aggregating purchasing volume across independent preferred contractors nationally, we gain access to pricing tiers typically available only to larger operators. This improves efficiency and visibility for contractors while maintaining full supplier compliance.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRICE TRACKING & NOTIFICATIONS -->
+    <section class="py-20 px-4 md:px-6 bg-gradient-to-br from-slate-50 to-orange-50">
+        <div class="container mx-auto max-w-5xl">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+                <div>
+                    <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-6">Price Tracking That Actually Matters</h2>
+                    <p class="text-lg text-gray-700 mb-6 leading-relaxed">
+                        Our system monitors pricing on your repeat purchases over time. You stay informed without lifting a finger.
+                    </p>
+
+                    <div class="space-y-4">
+                        <div class="flex gap-4">
+                            <div class="text-2xl">📊</div>
+                            <div>
+                                <h4 class="font-bold text-slate-900">Track Every Purchase</h4>
+                                <p class="text-gray-600 text-sm">See historical pricing on items you buy regularly.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="text-2xl">🔔</div>
+                            <div>
+                                <h4 class="font-bold text-slate-900">Instant Price Alerts (Optional)</h4>
+                                <p class="text-gray-600 text-sm">Receive notifications when prices go up or down — enable or disable anytime.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="text-2xl">💰</div>
+                            <div>
+                                <h4 class="font-bold text-slate-900">Better Quoting & Cost Control</h4>
+                                <p class="text-gray-600 text-sm">Accurate quotes to customers. Full visibility of your material costs.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="text-2xl">⏰</div>
+                            <div>
+                                <h4 class="font-bold text-slate-900">Improved Efficiency</h4>
+                                <p class="text-gray-600 text-sm">No more manual price checking. Data at your fingertips.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg p-8 border-l-4 border-orange-500">
+                    <h3 class="font-bold text-slate-900 text-lg mb-6">Example: Tracking LED Downlights</h3>
+                    <div class="space-y-3 text-sm">
+                        <div class="flex justify-between items-center py-2 border-b border-gray-200">
+                            <span class="text-gray-700">3 months ago</span>
+                            <span class="font-bold text-slate-900">$18.45</span>
+                        </div>
+                        <div class="flex justify-between items-center py-2 border-b border-gray-200">
+                            <span class="text-gray-700">2 months ago</span>
+                            <span class="font-bold text-slate-900">$18.60</span>
+                            <span class="text-red-500 text-xs font-bold">+0.8% ↑</span>
+                        </div>
+                        <div class="flex justify-between items-center py-2 border-b border-gray-200">
+                            <span class="text-gray-700">Last month</span>
+                            <span class="font-bold text-slate-900">$17.90</span>
+                            <span class="text-green-500 text-xs font-bold">-3.8% ↓</span>
+                        </div>
+                        <div class="flex justify-between items-center py-2 bg-orange-50 px-3 rounded font-bold">
+                            <span class="text-slate-900">Today</span>
+                            <span class="text-orange-600">$17.65</span>
+                            <span class="text-green-500 text-xs font-bold">-4.5% ↓</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 text-xs mt-4 italic">You would have saved $0.80 per unit from 3 months ago.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRICING TRANSPARENCY & COMPARISON -->
+    <section id="pricing" class="py-20 px-4 md:px-6 bg-white">
+        <div class="container mx-auto max-w-5xl">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Pricing Transparency & Comparison</h2>
+                <p class="text-lg text-gray-600">You stay in control. Full visibility before any commitment.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-8 border border-blue-200">
+                    <h3 class="text-xl font-bold text-slate-900 mb-4">🔍 Side-by-Side Comparison</h3>
+                    <p class="text-gray-700 mb-6">
+                        Compare Affiliate Warehouse pricing with your existing trade accounts. Same products. Same suppliers. Full transparency.
+                    </p>
+                    <div class="space-y-2 text-sm text-gray-700">
+                        <p><span class="font-bold text-blue-600">✓</span> View pricing anytime</p>
+                        <p><span class="font-bold text-blue-600">✓</span> No obligation to use our pricing</p>
+                        <p><span class="font-bold text-blue-600">✓</span> Make informed decisions</p>
+                        <p><span class="font-bold text-blue-600">✓</span> Zero pressure</p>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-br from-green-50 to-green-100 rounded-lg p-8 border border-green-200">
+                    <h3 class="text-xl font-bold text-slate-900 mb-4">📈 Group Leverage</h3>
+                    <p class="text-gray-700 mb-6">
+                        Aggregated purchasing volume puts independent contractors on a level playing field with larger operations.
+                    </p>
+                    <div class="space-y-2 text-sm text-gray-700">
+                        <p><span class="font-bold text-green-600">✓</span> Access bigger pricing tiers</p>
+                        <p><span class="font-bold text-green-600">✓</span> No reselling or broker fees</p>
+                        <p><span class="font-bold text-green-600">✓</span> Same suppliers & systems</p>
+                        <p><span class="font-bold text-green-600">✓</span> Lower material costs</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-12 bg-orange-50 border-l-4 border-orange-500 p-8 rounded">
+                <h3 class="text-xl font-bold text-slate-900 mb-4">✓ How You Benefit Immediately</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div>
+                        <p class="font-bold text-slate-900 mb-2">Quoting Accuracy</p>
+                        <p class="text-gray-700 text-sm">Know your material costs upfront. Deliver accurate quotes to customers.</p>
+                    </div>
+                    <div>
+                        <p class="font-bold text-slate-900 mb-2">Better Margins</p>
+                        <p class="text-gray-700 text-sm">Lower material costs = higher profit margins on every job.</p>
+                    </div>
+                    <div>
+                        <p class="font-bold text-slate-900 mb-2">Competitive Edge</p>
+                        <p class="text-gray-700 text-sm">Stay ahead of competitors who don't have volume leverage.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FEES & ALIGNED INCENTIVES -->
+    <section class="py-20 px-4 md:px-6 bg-slate-900 text-white">
+        <div class="container mx-auto max-w-5xl">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Simple Fee Structure</h2>
+                <p class="text-lg text-gray-300">We only win when you win.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+                <div class="bg-slate-800 border border-slate-700 rounded-lg p-8 text-center">
+                    <div class="text-4xl mb-4">💤</div>
+                    <h3 class="text-2xl font-bold mb-4">No Discount?</h3>
+                    <p class="text-gray-300 text-lg font-bold">
+                        <span class="text-orange-400">$0 Charged</span>
+                    </p>
+                    <p class="text-gray-400 text-sm mt-4">If there's no verified savings, you pay nothing. Simple as that.</p>
+                </div>
+
+                <div class="bg-orange-600 rounded-lg p-8 text-center border-2 border-orange-500">
+                    <div class="text-4xl mb-4">💰</div>
+                    <h3 class="text-2xl font-bold mb-4">Discount Achieved?</h3>
+                    <div class="mb-6">
+                        <p class="text-sm text-orange-100 mb-2">Affiliate Warehouse retains:</p>
+                        <p class="text-4xl font-bold mb-2">1.1%</p>
+                        <p class="text-sm text-orange-100">You keep the rest</p>
+                    </div>
+                    <p class="text-orange-100 text-sm">Billed monthly on verified savings only.</p>
+                </div>
+            </div>
+
+            <div class="bg-slate-800 rounded-lg p-8 mb-8">
+                <h3 class="text-xl font-bold mb-6 text-white">Example: $100 Savings on an Order</h3>
+                <table class="pricing-compare-table text-gray-300">
+                    <tbody>
+                        <tr>
+                            <td class="text-white">Original wholesale price</td>
+                            <td class="text-right">$500</td>
+                        </tr>
+                        <tr>
+                            <td class="text-white">Affiliate Warehouse price</td>
+                            <td class="text-right">$400</td>
+                        </tr>
+                        <tr class="border-t-2 border-orange-500">
+                            <td class="text-white font-bold">Your verified savings</td>
+                            <td class="text-right font-bold text-orange-400">$100</td>
+                        </tr>
+                        <tr>
+                            <td>Affiliate Warehouse fee (1.1%)</td>
+                            <td class="text-right">$1.10</td>
+                        </tr>
+                        <tr class="border-t border-slate-700">
+                            <td class="text-white font-bold">Your actual savings</td>
+                            <td class="text-right font-bold text-green-400">$98.90</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p class="text-gray-400 text-sm mt-4 italic">This example shows typical savings on high-value items. Residential items and commodities often see stronger results.</p>
+            </div>
+
+            <div class="bg-slate-800 border border-orange-500 rounded-lg p-8 text-center">
+                <h4 class="text-lg font-bold mb-3">🎯 Why 1.1%?</h4>
+                <p class="text-gray-300">
+                    Small enough to be meaningful to you. Large enough to support our operations, customer service, and continuous improvement.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- NO LOCK-INS SECTION -->
+    <section class="py-20 px-4 md:px-6 bg-white">
+        <div class="container mx-auto max-w-5xl">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-4">No Lock-Ins, No Surprises</h2>
+                <p class="text-lg text-gray-600">Flexibility built in from day one.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+                <div class="border-2 border-green-500 rounded-lg p-8 bg-green-50 text-center">
+                    <div class="text-5xl mb-4">📋</div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-2">No Contracts</h3>
+                    <p class="text-gray-700">Zero contractual obligations. Nothing to sign, nothing binding you to Affiliate Warehouse.</p>
+                </div>
+
+                <div class="border-2 border-blue-500 rounded-lg p-8 bg-blue-50 text-center">
+                    <div class="text-5xl mb-4">📉</div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-2">No Minimum Spend</h3>
+                    <p class="text-gray-700">Order what you want, when you want. No monthly minimums or purchase requirements.</p>
+                </div>
+
+                <div class="border-2 border-purple-500 rounded-lg p-8 bg-purple-50 text-center">
+                    <div class="text-5xl mb-4">🆓</div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-2">No Exclusivity</h3>
+                    <p class="text-gray-700">Keep your other trade accounts. Use multiple suppliers. You're always in control.</p>
+                </div>
+            </div>
+
+            <div class="bg-slate-900 text-white rounded-lg p-8 text-center">
+                <h3 class="text-2xl font-bold mb-4">Stop Using Anytime</h3>
+                <p class="text-gray-300 text-lg">
+                    Not seeing value? Stop using. Not interested anymore? We get it. No hard feelings, no cancellation fees.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- WHOLESALER ALIGNMENT & COMPLIANCE -->
+    <section id="compliance" class="py-20 px-4 md:px-6 bg-slate-800 text-white">
+        <div class="container mx-auto max-w-5xl">
+            <div class="text-center mb-12">
+                <div class="inline-block bg-orange-500 text-white font-bold py-2 px-4 rounded-lg text-sm mb-6">100% Wholesaler-Safe</div>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Industry Alignment & Compliance</h2>
+                <p class="text-lg text-gray-300 max-w-3xl mx-auto">
+                    This is collaboration and efficiency — not disruption. We operate within existing wholesaler systems and terms. Pricing and availability are set solely by wholesalers.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+                <div class="bg-slate-700 rounded-lg p-6 border-l-4 border-orange-500">
+                    <h3 class="font-bold text-white mb-2">✓ No Reselling of Goods</h3>
+                    <p class="text-gray-300 text-sm">All purchases remain for end-use, job-coded, fully traceable.</p>
+                </div>
+                <div class="bg-slate-700 rounded-lg p-6 border-l-4 border-orange-500">
+                    <h3 class="font-bold text-white mb-2">✓ No Alteration of Terms</h3>
+                    <p class="text-gray-300 text-sm">We operate within your wholesaler's existing terms and conditions.</p>
+                </div>
+                <div class="bg-slate-700 rounded-lg p-6 border-l-4 border-orange-500">
+                    <h3 class="font-bold text-white mb-2">✓ All Purchases Job-Coded</h3>
+                    <p class="text-gray-300 text-sm">Full transparency and traceability. Same process as regular accounts.</p>
+                </div>
+                <div class="bg-slate-700 rounded-lg p-6 border-l-4 border-orange-500">
+                    <h3 class="font-bold text-white mb-2">✓ Processed Through Standard Channels</h3>
+                    <p class="text-gray-300 text-sm">All purchases go through normal wholesaler systems and processes.</p>
+                </div>
+            </div>
+
+            <div class="bg-slate-700 rounded-lg p-8 text-center border border-orange-500">
+                <h3 class="text-xl font-bold mb-4">Our Message to Wholesalers</h3>
+                <p class="text-gray-300">
+                    Affiliate Warehouse improves efficiency and volume without undermining your pricing structures or systems. We're here to strengthen the relationship between wholesalers and their contractor base.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONVERSION FORMS -->
+    <section id="apply" class="py-20 px-4 md:px-6 bg-gradient-to-br from-gray-50 to-gray-100">
+        <div class="container mx-auto max-w-4xl">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Ready to Get Started?</h2>
+                <p class="text-lg text-gray-600">Choose your pathway below.</p>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden border border-gray-200">
+                <div class="grid grid-cols-1 md:grid-cols-3 border-b border-gray-200">
+                    <button class="tab-btn active py-4 px-3 md:px-2 text-sm md:text-base font-semibold text-gray-600 hover:bg-gray-50 focus:outline-none border-b-4 md:border-b-0 md:border-l md:border-gray-200" onclick="openTab(event, 'form1')">
+                        <div class="text-xl mb-1">👷</div>
+                        <div>Apply as Contractor</div>
+                    </button>
+                    <button class="tab-btn py-4 px-3 md:px-2 text-sm md:text-base font-semibold text-gray-600 hover:bg-gray-50 focus:outline-none border-l md:border-l border-gray-200" onclick="openTab(event, 'form2')">
+                        <div class="text-xl mb-1">💬</div>
+                        <div>Request Info</div>
+                    </button>
+                    <button class="tab-btn py-4 px-3 md:px-2 text-sm md:text-base font-semibold text-gray-600 hover:bg-gray-50 focus:outline-none border-l border-gray-200" onclick="openTab(event, 'form3')">
+                        <div class="text-xl mb-1">🤝</div>
+                        <div>Wholesaler Interest</div>
+                    </button>
+                </div>
+
+                <div class="p-8">
+                    <!-- Form 1: Contractor Application -->
+                    <div id="form1" class="tab-content active">
+                        <div class="mb-6">
+                            <h3 class="text-2xl font-bold text-slate-900 mb-2">Preferred Contractor Application</h3>
+                            <p class="text-gray-600">
+                                Apply to become a Preferred Contractor with access to group pricing, price tracking, and optional alerts.
+                            </p>
+                            <p class="text-sm text-orange-600 font-semibold mt-2">💡 No discount = No charge. Compare pricing anytime. Stop using anytime.</p>
+                        </div>
+
+                        <form class="space-y-4" onsubmit="handleFormSubmit(event, 'form1')">
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-1">Business Name *</label>
+                                <input type="text" placeholder="Your business name" required class="w-full p-3 border border-gray-300 rounded-lg focus:border-orange-500 focus:ring-2 focus:ring-orange-200 focus:outline-none transition">
+                            </div>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-semibold text-gray-700 mb-1">Contact Name *</label>
+                                    <input type="text" placeholder="Your name" required class="w-full p-3 border border-gray-300 rounded-lg focus:border-orange-500 focus:ring-2 focus:ring-orange-200 focus:outline-none transition">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-semibold text-gray-700 mb-1">Phone / Mobile *</label>
+                                    <input type="tel" placeholder="(02) 1234 5678" required class="w-full p-3 border border-gray-300 rounded-lg focus:border-orange-500 focus:ring-2 focus:ring-orange-200 focus:outline-none transition">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-1">Email *</label>
+                                <input type="email" placeholder="your@email.com" required class="w-full p-3 border border-gray-300 rounded-lg focus:border-orange-500 focus:ring-2 focus:ring-orange-200 focus:outline-none transition">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-1">Your Trade (Electrician, HVAC, Solar, etc.) *</label>
+                                <input type="text" placeholder="e.g., Electrical Contractor" required class="w-full p-3 border border-gray-300 rounded-lg focus:border-orange-500 focus:ring-2 focus:ring-orange-200 focus:outline-none transition">
+                            </div>
+                            <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 text-sm text-blue-700">
+                                <strong>Next Steps:</strong> Submit your details and choose a call time using Calendly (opens after submission). We'll review your application and call you at your selected time to discuss onboarding.
+                            </div>
+                            <button type="submit" class="w-full cta-button bg-slate-900 hover:bg-slate-800 text-white font-bold py-3 px-4 rounded-lg transition duration-300">
+                                Submit Application & Schedule Call
+                            </button>
+                            <p class="text-xs text-center text-gray-500">Your data is secure and will only be used to contact you about Affiliate Warehouse.</p>
+                        </form>
+                    </div>
+
+                    <!-- Form 2: Information / Call-Back Lead -->
+                    <div id="form2" class="tab-content">
+                        <div class="mb-6">
+                            <h3 class="text-2xl font-bold text-slate-900 mb-2">Request Information</h3>
+                            <p class="text-gray-600">
+                                Want to learn more before applying? Fill in your details and we'll call you to explain how Affiliate Warehouse works and answer your questions — no pressure.
+                            </p>
+                            <p class="text-sm text-orange-600 font-semibold mt-2">✓ No discount = no charge. You're free to compare pricing against your current suppliers.</p>
+                        </div>
+
+                        <form class="space-y-4" onsubmit="handleFormSubmit(event, 'form2')">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-semibold text-gray-700 mb-1">Your Name *</label>
+                                    <input type="text" placeholder="Your name" required class="w-full p-3 border border-gray-300 rounded-lg focus:border-orange-500 focus:ring-2 focus:ring-orange-200 focus:outline-none transition">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-semibold text-gray-700 mb-1">Business Name *</label>
+                                    <input type="text" placeholder="Your business name" required class="w-full p-3 border border-gray-300 rounded-lg focus:border-orange-500 focus:ring-2 focus:ring-orange-200 focus:outline-none transition">
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-semibold text-gray-700 mb-1">Phone *</label>
+                                    <input type="tel" placeholder="(02) 1234 5678" required class="w-full p-3 border border-gray-300 rounded-lg focus:border-orange-500 focus:ring-2 focus:ring-orange-200 focus:outline-none transition">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-semibold text-gray-700 mb-1">Email *</label>
+                                    <input type="email" placeholder="your@email.com" required class="w-full p-3 border border-gray-300 rounded-lg focus:border-orange-500 focus:ring-2 focus:ring-orange-200 focus:outline-none transition">
+                                </div>
+                            </div>
+                            <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 text-sm text-blue-700">
+                                <strong>What's Next:</strong> Submit your details and pick a call time using Calendly. We'll call you to walk through how Affiliate Warehouse works and answer any questions you have.
+                            </div>
+                            <button type="submit" class="w-full cta-button bg-slate-900 hover:bg-slate-800 text-white font-bold py-3 px-4 rounded-lg transition duration-300">
+                                Request Call-Back & Select Time
+                            </button>
+                            <p class="text-xs text-center text-gray-500">We'll call you during business hours at the time you select.</p>
+                        </form>
+                    </div>
+
+                    <!-- Form 3: Wholesaler Expression of Interest -->
+                    <div id="form3" class="tab-content">
+                        <div class="mb-6">
+                            <h3 class="text-2xl font-bold text-slate-900 mb-2">Wholesaler Expression of Interest</h3>
+                            <p class="text-gray-600">
+                                Interested in understanding how Affiliate Warehouse can support your business and contractor relationships? Let's start a conversation.
+                            </p>
+                            <p class="text-sm text-orange-600 font-semibold mt-2">✓ 100% Wholesaler-Safe. Operates within your existing systems and terms.</p>
+                        </div>
+
+                        <form class="space-y-4" onsubmit="handleFormSubmit(event, 'form3')">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-semibold text-gray-700 mb-1">Company Name *</label>
+                                    <input type="text" placeholder="Your company name" required class="w-full p-3 border border-gray-300 rounded-lg focus:border-orange-500 focus:ring-2 focus:ring-orange-200 focus:outline-none transition">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-semibold text-gray-700 mb-1">Contact Name *</label>
+                                    <input type="text" placeholder="Your name" required class="w-full p-3 border border-gray-300 rounded-lg focus:border-orange-500 focus:ring-2 focus:ring-orange-200 focus:outline-none transition">
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-semibold text-gray-700 mb-1">Email *</label>
+                                    <input type="email" placeholder="your@company.com" required class="w-full p-3 border border-gray-300 rounded-lg focus:border-orange-500 focus:ring-2 focus:ring-orange-200 focus:outline-none transition">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-semibold text-gray-700 mb-1">Phone *</label>
+                                    <input type="tel" placeholder="(02) 1234 5678" required class="w-full p-3 border border-gray-300 rounded-lg focus:border-orange-500 focus:ring-2 focus:ring-orange-200 focus:outline-none transition">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-1">Message (Optional)</label>
+                                <textarea placeholder="Tell us about your business and why you're interested..." rows="4" class="w-full p-3 border border-gray-300 rounded-lg focus:border-orange-500 focus:ring-2 focus:ring-orange-200 focus:outline-none transition"></textarea>
+                            </div>
+                            <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 text-sm text-blue-700">
+                                <strong>Next Step:</strong> Submit your details and choose a call time using Calendly. We'll discuss the Affiliate Warehouse model and explore alignment opportunities.
+                            </div>
+                            <button type="submit" class="w-full cta-button bg-slate-900 hover:bg-slate-800 text-white font-bold py-3 px-4 rounded-lg transition duration-300">
+                                Submit & Schedule Call
+                            </button>
+                            <p class="text-xs text-center text-gray-500">Confidential conversation. We're committed to a wholesaler-safe, collaborative approach.</p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Form Instructions -->
+            <div class="mt-10 bg-white rounded-lg border border-gray-200 p-8">
+                <h3 class="text-lg font-bold text-slate-900 mb-4">📋 How to Edit Form Destinations</h3>
+                <p class="text-gray-700 mb-4">To update where form submissions are sent:</p>
+                <ol class="list-decimal list-inside space-y-2 text-gray-700 text-sm">
+                    <li>Find the <code class="bg-gray-100 px-2 py-1 rounded text-xs">handleFormSubmit()</code> function at the bottom of the page.</li>
+                    <li>Replace <code class="bg-gray-100 px-2 py-1 rounded text-xs">YOUR_EMAIL_HERE</code> with your actual email address.</li>
+                    <li>Update the Calendly link in the success message if needed (default: <code class="bg-gray-100 px-2 py-1 rounded text-xs">calendly.com/yourname/30min</code>)</li>
+                    <li>Optionally integrate with Zapier, FormSubmit, or your CRM to automate submissions.</li>
+                </ol>
+            </div>
+        </div>
+    </section>
+
+    <!-- REVIEWS & SOCIAL PROOF -->
+    <section class="py-20 px-4 md:px-6 bg-gradient-to-br from-amber-50 to-orange-50">
+        <div class="container mx-auto max-w-5xl">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-4">What Contractors Are Saying</h2>
+                <p class="text-lg text-gray-600">Real results from independent contractors using Affiliate Warehouse.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="testimonial-card">
+                    <div class="flex items-center gap-1 mb-3">
+                        <span class="stars">★★★★★</span>
+                    </div>
+                    <p class="text-gray-700 mb-4 leading-relaxed">
+                        "Within the first month, we've already saved over $2,000 on materials through Affiliate Warehouse. The price tracking is brilliant — we know exactly when to buy."
+                    </p>
+                    <div>
+                        <p class="font-bold text-slate-900">Mark T.</p>
+                        <p class="text-sm text-gray-500">Electrical Contractor, Sydney</p>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="flex items-center gap-1 mb-3">
+                        <span class="stars">★★★★★</span>
+                    </div>
+                    <p class="text-gray-700 mb-4 leading-relaxed">
+                        "No lock-ins, no strings attached. We compared pricing for a month, saw real savings, and now we're part of the group. Simple as that."
+                    </p>
+                    <div>
+                        <p class="font-bold text-slate-900">Sarah M.</p>
+                        <p class="text-sm text-gray-500">HVAC Business Owner, Melbourne</p>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="flex items-center gap-1 mb-3">
+                        <span class="stars">★★★★★</span>
+                    </div>
+                    <p class="text-gray-700 mb-4 leading-relaxed">
+                        "Price alerts save us time every week. We're more competitive now and our margins have improved. Worth every penny of the 1.1% fee."
+                    </p>
+                    <div>
+                        <p class="font-bold text-slate-900">David P.</p>
+                        <p class="text-sm text-gray-500">Solar Installation, Brisbane</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ SECTION -->
+    <section id="faq" class="py-20 px-4 md:px-6 bg-white">
+        <div class="container mx-auto max-w-4xl">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Frequently Asked Questions</h2>
+                <p class="text-lg text-gray-600">Can't find an answer? Get in touch on the form above.</p>
+            </div>
+
+            <div class="space-y-3">
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>What wholesaler accounts do I get access to?</span>
+                        <span class="text-lg">+</span>
+                    </div>
+                    <div class="accordion-body">
+                        <p class="mb-2">Affiliate Warehouse provides access to:</p>
+                        <ul class="list-disc list-inside space-y-1 text-gray-700">
+                            <li><strong>TradeZone</strong> — Electrical and trade supplies</li>
+                            <li><strong>Ideal Electrical</strong> — Electrical and lighting</li>
+                            <li><strong>Voltex</strong> — Electrical and data network supplies</li>
+                        </ul>
+                        <p class="text-sm text-gray-600 mt-3">Additional accounts are being added as we grow. Let us know which suppliers you'd like access to.</p>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>How does Affiliate Warehouse make money?</span>
+                        <span class="text-lg">+</span>
+                    </div>
+                    <div class="accordion-body">
+                        <p class="mb-2">Simple: <strong>We only make money when you save money.</strong></p>
+                        <p class="text-gray-700">
+                            When a verified discount is achieved, we retain <strong>1.1%</strong> of the savings and you keep the rest (<strong>98.9%</strong>).
+                        </p>
+                        <p class="text-gray-700 mt-2">If there's no discount, there's no charge. Fees are billed monthly on verified savings only.</p>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>Am I locked in? Can I stop using it anytime?</span>
+                        <span class="text-lg">+</span>
+                    </div>
+                    <div class="accordion-body">
+                        <p class="text-gray-700 mb-2"><strong>No. You can stop anytime.</strong></p>
+                        <ul class="list-disc list-inside space-y-1 text-gray-700">
+                            <li>No contracts to sign</li>
+                            <li>No minimum spend requirements</li>
+                            <li>No exclusivity agreements</li>
+                            <li>Cancel anytime, no cancellation fees</li>
+                        </ul>
+                        <p class="text-gray-700 mt-3">If you're not seeing value, you're not obligated to continue. Stop whenever you choose.</p>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>How do I know pricing is actually improving?</span>
+                        <span class="text-lg">+</span>
+                    </div>
+                    <div class="accordion-body">
+                        <p class="text-gray-700">
+                            You compare side-by-side against your original trade accounts anytime. Our tool shows:
+                        </p>
+                        <ul class="list-disc list-inside space-y-1 text-gray-700 mt-2">
+                            <li>Price from your existing account</li>
+                            <li>Price through Affiliate Warehouse</li>
+                            <li>Your savings (dollar amount and %)</li>
+                            <li>Historical pricing trends</li>
+                        </ul>
+                        <p class="text-gray-700 mt-3">No guessing. You control whether you use the pricing or not.</p>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>Is this compliant with wholesaler systems?</span>
+                        <span class="text-lg">+</span>
+                    </div>
+                    <div class="accordion-body">
+                        <p class="text-gray-700 mb-2"><strong>Yes. 100% compliant.</strong></p>
+                        <p class="text-gray-700 mb-2">
+                            All purchases remain job-coded, fully traceable, and processed through normal wholesaler channels. We operate within your wholesaler's existing terms and conditions.
+                        </p>
+                        <p class="text-gray-700">
+                            There's no reselling, circumventing, or bypassing of wholesaler systems. This is collaboration, not disruption.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>What if Affiliate Warehouse stops being useful?</span>
+                        <span class="text-lg">+</span>
+                    </div>
+                    <div class="accordion-body">
+                        <p class="text-gray-700 mb-2">
+                            Stop using it. There's no cancellation process, no penalties, no awkward conversations. If you're not saving money, you're not paying.
+                        </p>
+                        <p class="text-gray-700">
+                            You're completely in control. Keep your other trade accounts. Use multiple suppliers. You decide.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>How are better prices achieved? How can you compete with wholesalers?</span>
+                        <span class="text-lg">+</span>
+                    </div>
+                    <div class="accordion-body">
+                        <p class="text-gray-700 mb-2">
+                            <strong>Aggregated purchasing volume.</strong> By pooling orders across independent preferred contractors nationally, we reach volume thresholds that typically trigger better pricing tiers from wholesalers.
+                        </p>
+                        <p class="text-gray-700 mt-2">
+                            We're not competing — we're working within wholesaler systems to improve volume and consistency, which benefits suppliers too.
+                        </p>
+                        <p class="text-gray-700 mt-2">
+                            Better pricing is achieved through cooperation, not circumvention.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>What about my privacy? How is my data used?</span>
+                        <span class="text-lg">+</span>
+                    </div>
+                    <div class="accordion-body">
+                        <p class="text-gray-700 mb-2">
+                            Your data is used solely to contact you about Affiliate Warehouse and to facilitate your price tracking and comparisons.
+                        </p>
+                        <p class="text-gray-700 mt-2">
+                            We don't sell, share, or misuse your data. You control all communications — enable or disable alerts anytime.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- COMPLIANCE & ETHICS SECTION -->
+    <section class="py-20 px-4 md:px-6 bg-slate-50">
+        <div class="container mx-auto max-w-5xl">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Compliance & Ethics</h2>
+                <p class="text-lg text-gray-600">Transparency and integrity in everything we do.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white rounded-lg border border-gray-200 p-8">
+                    <h3 class="text-lg font-bold text-slate-900 mb-4">✓ What We Are</h3>
+                    <ul class="space-y-3 text-gray-700">
+                        <li><strong>Procurement support and price-monitoring service</strong> for Australian trade contractors</li>
+                        <li><strong>100% wholesaler-safe</strong> — operates within existing systems and terms</li>
+                        <li><strong>Transparent comparison tool</strong> — you see pricing side-by-side</li>
+                        <li><strong>Voluntary participation</strong> — no pressure, no lock-ins</li>
+                        <li><strong>Non-exclusive</strong> — keep all your existing accounts</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white rounded-lg border border-gray-200 p-8">
+                    <h3 class="text-lg font-bold text-slate-900 mb-4">✗ What We Are Not</h3>
+                    <ul class="space-y-3 text-gray-700">
+                        <li><strong>Not a reseller</strong> — you buy directly from wholesalers</li>
+                        <li><strong>Not bypassing wholesalers</strong> — we operate through them</li>
+                        <li><strong>Not forcing discounts</strong> — wholesalers set all pricing</li>
+                        <li><strong>Not altering supplier terms</strong> — we work within them</li>
+                        <li><strong>Not taking your data</strong> — your information is confidential</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mt-12 bg-slate-900 text-white rounded-lg p-8">
+                <h3 class="text-xl font-bold mb-4">Our Commitment</h3>
+                <p class="text-gray-300 leading-relaxed mb-4">
+                    Affiliate Warehouse is built on trust. We operate transparently, compliantly, and in the best interests of contractors AND wholesalers. This isn't a shortcut or a loophole — it's a better way to do procurement.
+                </p>
+                <p class="text-gray-300">
+                    We're accountable for our claims. If pricing isn't working out, we don't charge. If it stops being useful, you can walk away. That's how we keep ourselves honest.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- LEGAL DISCLAIMER -->
+    <section class="py-16 px-4 md:px-6 bg-slate-800 text-gray-300 text-sm">
+        <div class="container mx-auto max-w-5xl">
+            <h3 class="text-white font-bold mb-4">Legal Disclaimer</h3>
+            <div class="space-y-3 leading-relaxed text-xs">
+                <p>
+                    <strong>Affiliate Warehouse Pty Ltd</strong> is a procurement support and price-monitoring service. By using Affiliate Warehouse, you acknowledge:
+                </p>
+                <ul class="list-disc list-inside space-y-2">
+                    <li>Pricing and discounts are set solely by wholesalers and subject to change without notice</li>
+                    <li>No guaranteed savings on all products — results vary by product, supplier, location, and market conditions</li>
+                    <li>Larger or high-volume items typically see stronger negotiated results</li>
+                    <li>Fees only apply where verifiable savings occur (1.1% of discount)</li>
+                    <li>Participation is voluntary, non-exclusive, and can be terminated anytime</li>
+                    <li>All purchases remain job-coded, fully traceable, and processed through normal wholesaler channels</li>
+                    <li>Affiliate Warehouse does not resell goods or alter wholesaler terms</li>
+                    <li>Price tracking is based on historical data and subject to data accuracy</li>
+                </ul>
+                <p class="mt-4">
+                    For full terms and conditions, contact us via the form above.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-slate-900 text-gray-400 py-12 px-4 md:px-6 text-sm">
+        <div class="container mx-auto max-w-5xl">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8 pb-8 border-b border-slate-700">
+                <div>
+                    <h4 class="text-white font-bold mb-4">About Affiliate Warehouse</h4>
+                    <p class="text-gray-400 text-xs leading-relaxed">Procurement support and price-monitoring for Australian trade contractors. Transparent. Honest.</p>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-4">Quick Links</h4>
+                    <ul class="space-y-2 text-xs">
+                        <li><a href="#how-it-works" class="text-gray-400 hover:text-orange-400 transition">How It Works</a></li>
+                        <li><a href="#apply" class="text-gray-400 hover:text-orange-400 transition">Apply Now</a></li>
+                        <li><a href="#apply" class="text-gray-400 hover:text-orange-400 transition">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-4">For Site Editors</h4>
+                    <p class="text-gray-400 text-xs leading-relaxed">All text, colors, forms, and links can be edited. See form section for editing instructions.</p>
+                </div>
+            </div>
+            <div class="text-center text-xs text-gray-500">
+                <p>&copy; 2026 Affiliate Warehouse. All Rights Reserved.</p>
+                <p class="mt-2">Procurement support and price-monitoring service. See legal section for disclaimers.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Success Modal -->
+    <div id="successModal" class="success-modal">
+        <div class="success-card">
+            <div class="text-5xl mb-4">✓</div>
+            <h3 class="text-2xl font-bold text-slate-900 mb-3" id="modalTitle">Thanks for Your Submission</h3>
+            <p class="text-gray-700 mb-6" id="modalMessage">Your details have been received.</p>
+            <p class="text-sm text-gray-600 mb-6">Next: Select your preferred call time using Calendly.</p>
+            <a href="https://calendly.com/yourname/30min" target="_blank" class="inline-block cta-button bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-8 rounded-lg transition duration-300 mb-4">Open Calendar</a>
+            <p class="text-xs text-gray-500">Change the Calendly link and email address in the JavaScript code below.</p>
+            <button onclick="closeModal()" class="text-gray-600 hover:text-gray-800 text-sm font-semibold mt-4">Close</button>
+        </div>
+    </div>
+
+    <script>
+        // Tab Management
+        function openTab(evt, tabName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].classList.remove("active");
+            }
+            tablinks = document.getElementsByClassName("tab-btn");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].classList.remove("active");
+            }
+            document.getElementById(tabName).classList.add("active");
+            evt.currentTarget.classList.add("active");
+        }
+
+        // Accordion Toggle
+        function toggleAccordion(header) {
+            const body = header.nextElementSibling;
+            const isActive = body.classList.contains("active");
+
+            document.querySelectorAll(".accordion-body").forEach(b => b.classList.remove("active"));
+            document.querySelectorAll(".accordion-header").forEach(h => h.style.background = "#FAFAFA");
+            document.querySelectorAll(".accordion-header span:last-child").forEach(s => s.textContent = "+");
+
+            if (!isActive) {
+                body.classList.add("active");
+                header.style.background = "#F3F4F6";
+                header.querySelector("span:last-child").textContent = "−";
+            }
+        }
+
+        // Form Submission Handler
+        function handleFormSubmit(event, formType) {
+            event.preventDefault();
+
+            const form = event.target;
+            const destinationEmail = "YOUR_EMAIL_HERE"; // CHANGE THIS TO YOUR EMAIL
+
+            // Show success modal
+            const modal = document.getElementById("successModal");
+            const modalTitle = document.getElementById("modalTitle");
+            const modalMessage = document.getElementById("modalMessage");
+
+            if (formType === "form1") {
+                modalTitle.textContent = "Thanks — Your Application is Received";
+                modalMessage.innerHTML = "We'll review your details and call you at your selected time to walk through the Affiliate Warehouse onboarding process and answer any questions.";
+            } else if (formType === "form2") {
+                modalTitle.textContent = "Thanks for Booking In";
+                modalMessage.innerHTML = "We'll review your details and give you a call at your selected time to walk you through how Affiliate Warehouse works and answer any questions.";
+            } else if (formType === "form3") {
+                modalTitle.textContent = "Thanks — We've Received Your Details";
+                modalMessage.innerHTML = "We'll review the information and call you at your scheduled time to discuss the Affiliate Warehouse model and next steps.";
+            }
+
+            modal.classList.add("show");
+            form.reset();
+
+            // UNCOMMENT TO USE: Integrate with FormSubmit.co or your email service
+            // fetch("https://formsubmit.co/" + destinationEmail, {
+            //     method: "POST",
+            //     body: new FormData(form),
+            //     headers: { 'Accept': 'application/json' }
+            // }).catch(error => console.log('Form submitted locally'));
+        }
+
+        // Close Modal
+        function closeModal() {
+            document.getElementById("successModal").classList.remove("show");
+        }
+
+        // Smooth Scroll Helper
+        function scrollToSection(id) {
+            const element = document.getElementById(id);
+            if (element) element.scrollIntoView({ behavior: "smooth" });
+        }
+
+        // Close modal when clicking outside
+        document.getElementById("successModal").addEventListener("click", function(event) {
+            if (event.target === this) closeModal();
+        });
+
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById("mobile-menu-btn");
+        const mobileMenu = document.getElementById("mobile-menu");
+        const mobileLinks = document.querySelectorAll(".mobile-link");
+
+        mobileMenuBtn.addEventListener("click", function() {
+            mobileMenu.classList.toggle("hidden");
+        });
+
+        // Close mobile menu when a link is clicked
+        mobileLinks.forEach(link => {
+            link.addEventListener("click", function() {
+                mobileMenu.classList.add("hidden");
+            });
+        });
+    </script>
+</body>
+</html>
